@@ -68,9 +68,6 @@ $(".btn").on("click", function () {
             }
         }
     }
-    else {
-        alert("Alerta!")
-    }
 })
 
 function addStep(sequence) {
