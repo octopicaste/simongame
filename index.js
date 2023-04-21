@@ -1,5 +1,5 @@
 let buttonColors = {1:"green", 2:"red", 3:"yellow", 4:"blue"}
-let gameOn
+let gameOn = false
 
 let lastColor
 let correctColor
@@ -20,8 +20,16 @@ function gameSetup() {
 
 gameSetup()
 
-$(document).on("keydown click", function (event) {
+$(document).on("keydown", function (event) {
     if (gameOn == false) {
+        gameOn = true
+        gameStart()
+    }
+});
+
+$("body").on("click", ".here", function (event) {
+    if (gameOn == false) {
+        console.log("clicked here")
         gameOn = true
         gameStart()
     }
@@ -38,7 +46,7 @@ $(".btn").on("click", function () {
             buttonAnimation('wrong')
             backgroundAnimation()
             console.log("Wrong!, correct color was " + correctColor +", current sequence: "+currentSequence+", in level count: "+inLevelCount)
-            changeTitle("You lost! Press any key to start again")
+            changeTitle("You lost! Press any key or click <span class='here'>here</span> to start again")
             gameSetup()
         }
         else {
@@ -59,6 +67,9 @@ $(".btn").on("click", function () {
                 inLevelCount ++
             }
         }
+    }
+    else {
+        alert("Alerta!")
     }
 })
 
