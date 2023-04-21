@@ -28,34 +28,36 @@ $(document).on("keydown click", function (event) {
 });
 
 $(".btn").on("click", function () {
-    correctColor = buttonColors[currentSequence[inLevelCount-1]]
-    clickedColor = $(this).attr("id")
+    if (gameOn) {
+        correctColor = buttonColors[currentSequence[inLevelCount-1]]
+        clickedColor = $(this).attr("id")
+        
+        console.log(inLevelCount + ", "+currentSequence[currentSequence.length-1])
     
-    console.log(inLevelCount + ", "+currentSequence[currentSequence.length-1])
-
-    if (isWrongClick()) {
-        buttonAnimation('wrong')
-        backgroundAnimation()
-        console.log("Wrong!, correct color was " + correctColor +", current sequence: "+currentSequence+", in level count: "+inLevelCount)
-        changeTitle("You lost! Press any key to start again")
-        gameSetup()
-    }
-    else {
-        buttonAnimation(clickedColor)
-        console.log("correcte! Sequencia: "+currentSequence+". Longitud sequencia: "+currentSequence.length+". InLevelCount: "+inLevelCount+". ")
-        if (inLevelCount === currentSequence.length) {
-            console.log("pas al seguent nivell")
-            currentLevel ++
-            inLevelCount = 1
-            currentSequence = addStep(currentSequence)
-            setTimeout(() => {
-                changeTitle("Level "+ currentLevel)
-                executeRound(currentSequence)
-              }, 500);
+        if (isWrongClick()) {
+            buttonAnimation('wrong')
+            backgroundAnimation()
+            console.log("Wrong!, correct color was " + correctColor +", current sequence: "+currentSequence+", in level count: "+inLevelCount)
+            changeTitle("You lost! Press any key to start again")
+            gameSetup()
         }
         else {
-            console.log("segueix")
-            inLevelCount ++
+            buttonAnimation(clickedColor)
+            console.log("correcte! Sequencia: "+currentSequence+". Longitud sequencia: "+currentSequence.length+". InLevelCount: "+inLevelCount+". ")
+            if (inLevelCount === currentSequence.length) {
+                console.log("pas al seguent nivell")
+                currentLevel ++
+                inLevelCount = 1
+                currentSequence = addStep(currentSequence)
+                setTimeout(() => {
+                    changeTitle("Level "+ currentLevel)
+                    executeRound(currentSequence)
+                  }, 500);
+            }
+            else {
+                console.log("segueix")
+                inLevelCount ++
+            }
         }
     }
 })
@@ -97,7 +99,9 @@ function isWrongClick() {
 function gameStart() {
     $("h1").html("Level l")
     currentSequence = addStep(currentSequence)
-    executeRound(currentSequence)
+    setTimeout(() => {
+        executeRound(currentSequence)
+      }, 400);
 }
 
 function changeTitle(string) {
