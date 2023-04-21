@@ -20,7 +20,7 @@ function gameSetup() {
 
 gameSetup()
 
-$(document).on("keydown", function (event) {
+$(document).on("keydown click", function (event) {
     if (gameOn == false) {
         gameOn = true
         gameStart()
