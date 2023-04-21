@@ -67,7 +67,7 @@ function addStep(sequence) {
 }
 
 function buttonAnimation(color) {
-    let sound = new Audio("/sounds/"+color+".mp3")
+    let sound = new Audio("./sounds/"+color+".mp3")
 
     $("."+color).addClass("pressed")
     sound.play()
